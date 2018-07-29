@@ -1,0 +1,75 @@
+<h1>
+    <img src="/assets/img/singleburger1.jpg" class=center alt="burger" id="singleburger">
+    <p>Eat-Da-Burger App</p>
+</h1>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-12 box" id="menu1">
+                <h2>Burgers Ready to Devour</h2>
+
+                <ul>
+                    <!-- id: the burgers table id that is part of the data selected -->
+                    {{#each item}} {{#unless devoured}}
+                    <li>
+                        <!-- when click "Devour" button, the entry is moved to the "Devoured" list -->
+                        <form action="/api/burgers/{{this.id}}? method=POST">
+                            <span>
+                                <!-- <h4>{{this.id}} : {{this.burger_name}} -->
+                                <h4>{{this.burger_name}}
+                                    <input type="hidden" name="devoured" value="true"></input>
+                                    <button type="submit" class="right btn-danger change-devour" data-id="{{id}}" data-newdevour="true">Devour Me!</button>
+                                </h4>
+                            </span>
+                        </form>
+
+                    </li>
+                    {{/unless}} {{/each}}
+                </ul>
+            </div>
+        </div>
+
+        {{!--
+        <div class="col-md-2">
+            <p> </p>
+        </div> --}}
+
+        <!-- display the burgers already "devoured"-->
+        <div class="col-md-6">
+            <div class="col-md-12 box" id="menu2">
+                <h2>Burgers Already Devoured</h2>
+
+                <ul>
+                    {{#each item}} {{#if devoured}}
+                    <li>
+                        <!-- <h4>{{this.id}} : {{this.burger_name}} -->
+                        <h4 class="center">{{this.burger_name}}</h4>
+                    </li>
+                    {{/if}} {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- add a new burger -->
+
+    <div class="row box center" id="add-div">
+        <h2>Add a Burger</h2>
+        <form class="create-form">
+
+            <div class="form-group center">
+                <label for="newburger">Burger Name:</label>
+                <center>
+                    <input class="center" type="text" id="newburger" name="name">
+                </center>
+            </div>
+
+            <button type="submit" class="btn-danger">Add Burger</button>
+
+        </form>
+    </div>
+
+</div>
